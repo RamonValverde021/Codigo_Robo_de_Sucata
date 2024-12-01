@@ -65,7 +65,10 @@ void _Pulso(int coordenada);
 void _Cotovelo(int coordenada);
 void _Ombro(int coordenada);
 void _Base(int coordenada);
-void _OmbroCotovelo(int ombro, int cotovelo), _CotoveloPulso(int cotovelo, int pulso), _BaseRotacao(int base, int rotacao);
+void _OmbroCotovelo(int ombro, int cotovelo);
+void _CotoveloPulso(int cotovelo, int pulso);
+void _BaseRotacao(int base, int rotacao);
+void _OmbroCotoveloPulso(int ombro, int cotovelo, int pulso);
 
 // Outras Funções
 void _DisplaySerial(char index, int coordenada);
@@ -74,7 +77,7 @@ void _posicaoInicial();
 void _Status(int envio);
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(38400);
   Bluetooth.begin(38400);
   _DisplaySerial('I', 0);
 

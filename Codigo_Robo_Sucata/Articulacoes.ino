@@ -1,5 +1,5 @@
 void _Base(int coordenada) {
-  constrain(coordenada, min_Base, max_Base);  
+  constrain(coordenada, min_Base, max_Base);
   int leitura, c = 0, aux1 = coordenada - 5, aux2 = coordenada + 5;
   int tamanho_media = 10;
   int contador = 0;
@@ -38,7 +38,7 @@ void _Base(int coordenada) {
 }
 
 void _Ombro(int coordenada) {
-  constrain(coordenada, min_Ombro, max_Ombro);  
+  constrain(coordenada, min_Ombro, max_Ombro);
   int leitura, c = 0, aux1 = coordenada - 10, aux2 = coordenada + 10;
   int tamanho_media = 10;
   int contador = 0;
@@ -78,7 +78,7 @@ void _Ombro(int coordenada) {
 }
 
 void _Cotovelo(int coordenada) {
-  constrain(coordenada, min_Cotovelo, max_Cotovelo);  
+  constrain(coordenada, min_Cotovelo, max_Cotovelo);
   int leitura, c = 0, aux1 = coordenada - 5, aux2 = coordenada + 5;
   int tamanho_media = 10;
   int contador = 0;
@@ -228,8 +228,8 @@ void _Garra(int posicao) {
 
 void _OmbroCotovelo(int ombro, int cotovelo) {
   // Delimita os limites das articulações
-  constrain(ombro, min_Ombro, max_Ombro);    
-  constrain(cotovelo, min_Cotovelo, max_Cotovelo); 
+  constrain(ombro, min_Ombro, max_Ombro);
+  constrain(cotovelo, min_Cotovelo, max_Cotovelo);
 
   // Variaveis de controle do Ombro
   int leitura1, aux11 = ombro - 10, aux12 = ombro + 10;
@@ -304,7 +304,7 @@ void _OmbroCotovelo(int ombro, int cotovelo) {
 
 void _CotoveloPulso(int cotovelo, int pulso) {
   // Delimita os limites das articulações
-  constrain(cotovelo, min_Cotovelo, max_Cotovelo); 
+  constrain(cotovelo, min_Cotovelo, max_Cotovelo);
   constrain(pulso, min_Pulso, max_Pulso);
 
   // Variaveis de controle do Cotovelo
@@ -320,12 +320,12 @@ void _CotoveloPulso(int cotovelo, int pulso) {
   while (c <= 3) {
     while ((cotovelo != leitura1) || (pulso != leitura2)) {  // Enquanto as articulações não chegam aos sua posição
       for (int c = 0; c < tamanho_media; c++) {
-        // Analisa a posição do ombro e soma os dados na media
+        // Analisa a posição do cotovelo e soma os dados na media
         leitura1 = analogRead(scanner_Cotovelo);
         leitura1 = map(leitura1, 0, 1023, 0, 100);
         contador1 += leitura1;
 
-        // Analisa a posição do cotovelo e soma os dados na media
+        // Analisa a posição do pulso e soma os dados na media
         leitura2 = analogRead(scanner_Pulso);
         leitura2 = map(leitura2, 0, 1023, 0, 100);
         contador2 += leitura2;
@@ -378,8 +378,8 @@ void _CotoveloPulso(int cotovelo, int pulso) {
 
 void _BaseRotacao(int base, int rotacao) {
   // Delimita os limites das articulações
-  constrain(base, min_Base, max_Base);     
-  constrain(rotacao, min_Rotacao, max_Rotacao);  
+  constrain(base, min_Base, max_Base);
+  constrain(rotacao, min_Rotacao, max_Rotacao);
 
   // Variaveis de controle da Base
   int leitura1, aux11 = base - 5, aux12 = base + 5;
@@ -444,6 +444,107 @@ void _BaseRotacao(int base, int rotacao) {
     delay(100);
     Serial.print(">");
   }
+  Serial.println(" OK \n-----------------------------");
+  lcd.noBacklight();
+  delay(200);
+  lcd.backlight();
+}
+
+void _OmbroCotoveloPulso(int ombro, int cotovelo, int pulso) {
+  // Delimita os limites das articulações
+  constrain(ombro, min_Ombro, max_Ombro);
+  constrain(cotovelo, min_Cotovelo, max_Cotovelo);
+  constrain(pulso, min_Pulso, max_Pulso);
+
+  // Variaveis de controle do Ombro
+  int leitura1, aux11 = ombro - 10, aux12 = ombro + 10;
+
+  // Variaveis de controle do Cotovelo
+  int leitura2, aux21 = cotovelo - 5, aux22 = cotovelo + 5;
+
+  // Variaveis de controle do Pulso
+  int leitura3, aux31 = pulso - 5, aux32 = pulso + 5;
+
+  // Variaveis da media de valores lidos
+  int tamanho_media = 10;
+  int contador1 = 0, contador2 = 0, contador3 = 0, c = 0;
+
+  while (c <= 3) {
+    while ((ombro != leitura1) || (cotovelo != leitura2) || (pulso != leitura3)) {  // Enquanto as articulações não chegam aos sua posição
+      for (int c = 0; c < tamanho_media; c++) {
+        // Analisa a posição do ombro e soma os dados na media
+        leitura1 = analogRead(scanner_Ombro);
+        leitura1 = map(leitura1, 0, 1023, 0, 100);
+        contador1 += leitura1;
+
+        // Analisa a posição do cotovelo e soma os dados na media
+        leitura2 = analogRead(scanner_Cotovelo);
+        leitura2 = map(leitura2, 0, 1023, 0, 100);
+        contador2 += leitura2;
+
+        // Analisa a posição do pulso e soma os dados na media
+        leitura3 = analogRead(scanner_Pulso);
+        leitura3 = map(leitura3, 0, 1023, 0, 100);
+        contador3 += leitura3;
+      }
+      // Calcula a media das posições
+      leitura1 = (contador1 / tamanho_media);
+      leitura2 = (contador2 / tamanho_media);
+      leitura3 = (contador3 / tamanho_media);
+
+      // Zera os somadores
+      contador1 = 0;
+      contador2 = 0;
+      contador3 = 0;
+
+      //Movimenta o Ombro
+      if (ombro > leitura1) {
+        digitalWrite(ombroE, HIGH);
+        digitalWrite(ombroD, LOW);
+      } else if (ombro < leitura1) {
+        digitalWrite(ombroE, LOW);
+        digitalWrite(ombroD, HIGH);
+      } else if (ombro == leitura1) {
+        digitalWrite(ombroE, HIGH);
+        digitalWrite(ombroD, HIGH);
+      }
+      ((leitura1 < aux12) && (leitura1 > aux11)) ? analogWrite(pwm_Ombro, 220) : analogWrite(pwm_Ombro, 255);
+      if (leitura1 <= 25) analogWrite(pwm_Ombro, 255);
+      if (ombro == leitura1) analogWrite(pwm_Ombro, 0);
+
+      //Movimenta o Cotovelo
+      if (cotovelo > leitura2) {
+        digitalWrite(cotoveloE, HIGH);
+        digitalWrite(cotoveloD, LOW);
+      } else if (cotovelo < leitura2) {
+        digitalWrite(cotoveloE, LOW);
+        digitalWrite(cotoveloD, HIGH);
+      } else if (cotovelo == leitura2) {
+        digitalWrite(cotoveloE, HIGH);
+        digitalWrite(cotoveloD, HIGH);
+      }
+      ((leitura2 < aux22) && (leitura2 > aux21)) ? analogWrite(pwm_Cotovelo, 215) : analogWrite(pwm_Cotovelo, 255);
+      if (cotovelo == leitura2) analogWrite(pwm_Cotovelo, 0);
+
+      //Movimenta o Pulso
+      if (pulso > leitura3) {
+        digitalWrite(pulsoE, HIGH);
+        digitalWrite(pulsoD, LOW);
+      } else if (pulso < leitura3) {
+        digitalWrite(pulsoE, LOW);
+        digitalWrite(pulsoD, HIGH);
+      } else if (pulso == leitura3) {
+        digitalWrite(pulsoE, HIGH);
+        digitalWrite(pulsoD, HIGH);
+      }
+      ((leitura3 < aux32) && (leitura3 > aux31)) ? analogWrite(pwm_Pulso, 225) : analogWrite(pwm_Pulso, 255);
+      if (pulso == leitura3) analogWrite(pwm_Pulso, 0);
+    }
+    c++;
+    delay(100);
+    Serial.print(">");
+  }
+
   Serial.println(" OK \n-----------------------------");
   lcd.noBacklight();
   delay(200);
