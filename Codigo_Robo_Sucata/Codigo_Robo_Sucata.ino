@@ -73,8 +73,11 @@ void _OmbroCotoveloPulso(int ombro, int cotovelo, int pulso);
 // Outras Funções
 void _DisplaySerial(char index, int coordenada);
 void _entradaDados(char *articulacao, int *posicao);
-void _posicaoInicial();
 void _Status(int envio);
+
+// Rotinas
+void _posicaoInicial();
+void _Rotina_01();
 
 void setup() {
   Serial.begin(38400);
@@ -125,30 +128,10 @@ void setup() {
   digitalWrite(led, LOW);
 
   _entradaDados('x', -1);  // Chamada de função para bloquear a ultima instrução enviada
-  //_posicaoInicial();
+  _posicaoInicial();
+  Serial.println("-----------------------------> Robo Inicializado com Sucesso <-----------------------------");
   _Status(1);  // Serial
   _Status(2);  // Bluettoth
-/*
-_Base(4);
-_Base(96);
-  
-/*
-_Rotacao(20);
-delay(500);
-_Rotacao(96);
-
-  _BaseRotacao(65, 18);
-  _OmbroCotoveloPulso(10, 45, 40);
-  _Garra(0);
-  digitalWrite(luz, HIGH);
-  _CotoveloPulso(70, 80);
-   _Garra(1);
-   digitalWrite(luz, LOW);
-  _CotoveloPulso(45, 42);
-  _OmbroCotovelo(45, 15);
-  _BaseRotacao(45, 97);
-  */
-  
 }
 
 void loop() {
@@ -175,7 +158,7 @@ void loop() {
       _DisplaySerial('1', NULL);
       imprimeStatus = false;
     }
-    /* Aqui vai a função */
+    _Rotina_01();
   } else if (countContador == 2) {
     if (imprimeStatus == true) {
       _DisplaySerial('2', NULL);
@@ -198,20 +181,4 @@ void loop() {
     }
   }
   lastContadorState = contadorState;  // Atualiza o estado anterior do botão
-}
-
-void _posicaoInicial() {
-  ////// Posicao Inicial/Final do Robo ///////////
-  digitalWrite(luz, HIGH);
-  delay(2000);  //2000
-  digitalWrite(luz, LOW);
-
-  _Ombro(44);
-  _Cotovelo(15);
-  _Pulso(42);
-  _Garra(1);     // Fechada.
-  _Rotacao(96);  // Centralizado
-  _Base(45);     // Centralizado
-
-  Serial.println("-----------------------------> Robo Inicializado com Sucesso <-----------------------------");
 }

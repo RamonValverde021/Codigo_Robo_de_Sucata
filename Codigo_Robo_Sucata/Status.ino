@@ -1,5 +1,5 @@
 unsigned long tempo_Anterior_Status = 0;
-unsigned long intervalo_Status = 200;  // 1000
+unsigned long intervalo_Status = 1000;  // 1000
 
 void _Status(int envio) {
   int base = analogRead(scanner_Base);

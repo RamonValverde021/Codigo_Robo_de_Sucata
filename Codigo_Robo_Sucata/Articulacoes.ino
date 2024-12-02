@@ -143,7 +143,7 @@ void _Pulso(int coordenada) {
         digitalWrite(pulsoE, LOW);
         digitalWrite(pulsoD, LOW);
       }
-      ((leitura < aux2) && (leitura > aux1)) ? analogWrite(pwm_Pulso, 200) : analogWrite(pwm_Pulso, 255);
+      ((leitura < aux2) && (leitura > aux1)) ? analogWrite(pwm_Pulso, 225) : analogWrite(pwm_Pulso, 255);
       if (coordenada == leitura) analogWrite(pwm_Pulso, 0);
     }
     c++;
@@ -200,7 +200,7 @@ void _Garra(int posicao) {
   constrain(posicao, min_Garra, max_Garra);
   // 1 garra aberta   0 garra fechada
   int espera = 400;  // 300
-  analogWrite(pwm_Garra, 200);
+  analogWrite(pwm_Garra, 180);
   if (posicao == 0) {
     // Abre a Garra
     digitalWrite(garraE, HIGH);
@@ -362,7 +362,7 @@ void _CotoveloPulso(int cotovelo, int pulso) {
         digitalWrite(pulsoE, HIGH);
         digitalWrite(pulsoD, HIGH);
       }
-      ((leitura2 < aux22) && (leitura2 > aux21)) ? analogWrite(pwm_Pulso, 200) : analogWrite(pwm_Pulso, 255);
+      ((leitura2 < aux22) && (leitura2 > aux21)) ? analogWrite(pwm_Pulso, 225) : analogWrite(pwm_Pulso, 255);
       if (pulso == leitura2) analogWrite(pwm_Pulso, 0);
     }
     c++;
@@ -536,7 +536,7 @@ void _OmbroCotoveloPulso(int ombro, int cotovelo, int pulso) {
         digitalWrite(pulsoE, HIGH);
         digitalWrite(pulsoD, HIGH);
       }
-      ((leitura3 < aux32) && (leitura3 > aux31)) ? analogWrite(pwm_Pulso, 200) : analogWrite(pwm_Pulso, 255);
+      ((leitura3 < aux32) && (leitura3 > aux31)) ? analogWrite(pwm_Pulso, 225) : analogWrite(pwm_Pulso, 255);
       if (pulso == leitura3) analogWrite(pwm_Pulso, 0);
     }
     c++;
