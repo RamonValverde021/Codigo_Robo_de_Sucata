@@ -170,7 +170,6 @@ void _DisplaySerial(char index, int coordenada) {
         lcd.print(">> ");
         lcd.setCursor(3, 1);  // Coluna 0  Linha 0
         lcd.print("Ligar");
-        digitalWrite(luz, HIGH);
         Serial.print("\nLUZ: ");
         Serial.println("Ligar");
       } else if (coordenada == 0) {
@@ -183,7 +182,6 @@ void _DisplaySerial(char index, int coordenada) {
         lcd.print(">> ");
         lcd.setCursor(3, 1);  // Coluna 0  Linha 0
         lcd.print("Desligar");
-        digitalWrite(luz, LOW);
         Serial.print("\nLUZ: ");
         Serial.println("Desligar");
       }

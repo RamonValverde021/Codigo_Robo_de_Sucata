@@ -1,6 +1,6 @@
 void _Comandos() {
-  char articulacao;
-  int posicao;
+  char articulacao  = 'x';
+  int posicao  = 0;
   // Ao chamar a função, é preciso passar os endereços das variáveis onde deseja armazenar os resultados, isso é feito usando o operador '&' antes das variáveis.
   _entradaDados(&articulacao, &posicao);
   if (posicao != -1) {
@@ -41,7 +41,9 @@ void _Comandos() {
       }
       posicaoAtual = posicao;
     } else if (articulacao == 'L') {
-      if (posicaoAtual != posicao) _DisplaySerial(articulacao, posicao);
+      if (posicaoAtual != posicao) {
+        posicao == 1 ? digitalWrite(luz, HIGH) : digitalWrite(luz, LOW);
+      }
       posicaoAtual = posicao;
     }
   }

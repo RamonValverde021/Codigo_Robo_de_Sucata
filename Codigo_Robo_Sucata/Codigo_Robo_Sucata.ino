@@ -22,9 +22,9 @@ const int pwm_Garra = 2;
 // Posição Minima e Maxima
 const int min_Base = 4, max_Base = 96;
 const int min_Ombro = 4, max_Ombro = 44;
-const int min_Cotovelo = 15, max_Cotovelo = 96;
-const int min_Pulso = 15, max_Pulso = 90;
-const int min_Rotacao = 15, max_Rotacao = 96;
+const int min_Cotovelo = 10, max_Cotovelo = 96;
+const int min_Pulso = 15, max_Pulso = 80;
+const int min_Rotacao = 15, max_Rotacao = 97;
 const int min_Garra = 0, max_Garra = 1;
 
 // Entradas Potenciometros
@@ -125,33 +125,30 @@ void setup() {
   digitalWrite(led, LOW);
 
   _entradaDados('x', -1);  // Chamada de função para bloquear a ultima instrução enviada
-                           //_posicaoInicial();
-
-  /*
-  _OmbroCotovelo(44, 15);
-  delay(500);
-
-  _OmbroCotovelo(10, 60);
-  delay(500);
-  _OmbroCotovelo(44, 15);
-  delay(500);
-*/
-  /*
-  _BaseRotacao(50, 10);
-  delay(500);
-
-  _BaseRotacao(10, 80);
-  delay(500);
-  _BaseRotacao(50, 10);
-  delay(500);
-*/
-
-/*
-_CotoveloPulso(30, 60);
-_CotoveloPulso(15, 45);
-*/
+  //_posicaoInicial();
   _Status(1);  // Serial
   _Status(2);  // Bluettoth
+/*
+_Base(4);
+_Base(96);
+  
+/*
+_Rotacao(20);
+delay(500);
+_Rotacao(96);
+
+  _BaseRotacao(65, 18);
+  _OmbroCotoveloPulso(10, 45, 40);
+  _Garra(0);
+  digitalWrite(luz, HIGH);
+  _CotoveloPulso(70, 80);
+   _Garra(1);
+   digitalWrite(luz, LOW);
+  _CotoveloPulso(45, 42);
+  _OmbroCotovelo(45, 15);
+  _BaseRotacao(45, 97);
+  */
+  
 }
 
 void loop() {
@@ -211,10 +208,10 @@ void _posicaoInicial() {
 
   _Ombro(44);
   _Cotovelo(15);
-  _Pulso(45);
+  _Pulso(42);
   _Garra(1);     // Fechada.
-  _Rotacao(80);  // Centralizado
-  _Base(43);     // Centralizado
+  _Rotacao(96);  // Centralizado
+  _Base(45);     // Centralizado
 
   Serial.println("-----------------------------> Robo Inicializado com Sucesso <-----------------------------");
 }
